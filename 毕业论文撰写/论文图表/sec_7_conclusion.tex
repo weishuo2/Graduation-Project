@@ -1,0 +1,17 @@
+\section{Conclusion and Future Opportunities}
+\label{conclusion}
+
+This paper focuses on the graph coloring problem on GPU. 
+The recursion computation model can cause the long tail 
+problem, which leads to the low efficiency, while the 
+sequential spread computation model can cause other problems 
+such as low convergence speed. This paper propose a high performance 
+graph coloring algorithm on GPU, called Feluca. Feluca 
+combines the recursion model and the sequential spread model, which significantly improves 
+the graph coloring efficiency. We also propose the optimization techniques in Feluca to avoid the atomic operations, including the craftly-designed method to eliminate the cyclic paths in graphs and a top-down coloring 
+scheme. Experimental results show that Feluca can achieve up to 
+344.58$\times$ speed up over the state-of-art work and at the same time uses fewer colors on some datasets.
+
+In the future, we plan to focus on other aspects of graph 
+coloring, such as coloring the graphs in hybrid systems, coloring the 
+graphs on new devices and coloring the dynamic graph on GPU and new devices.

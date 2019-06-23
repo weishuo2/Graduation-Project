@@ -1,0 +1,19 @@
+毕设题目：基于并行计算架构的大规模图平衡着色算法
+目的要求：在并行计算应用中，图着色算法被广泛用来识别并行计算的独立任务的子集。传统的启发式着色方法旨在减少颜色的数量，因为该数量也对应于应用程序中迭代步骤的数量。但是，如果生成的颜色类存在明显的差异，则会导致计算负载不均、硬件资源的利用效率低下等问题。均匀着色是一种理论上的着色公式，它保证了颜色类之间的完美平衡，在实际应用中往往会对均匀着色进行一定的松弛处理，这种被松弛处理的均匀着色被称为平衡着色。本课题旨在重新审视并行计算环境中均衡着色的问题，拟提出并设计一种基于并行计算架构的平衡图着色算法，在不增加颜色数的前提下保证各颜色块中顶点数量的均衡，帮助程序开发人员提高应用程序的并行性能。
+主要内容：
+1.	了解GPU体系结构以及开发环境的配置，并学习CUDA编程方法
+2.	理解大规模图着色算法
+3.	熟悉并行消息通信方法
+4.	实现一种基于GPU的平衡着色算法，并能照顾到GPU访存模式，尽可能充分利用GPU的计算能力
+预期目标：
+1.	了解GPU体系结构以及CUDA编程方法
+2.	理解平衡着色算法
+3.	掌握需求分析和系统设计方法
+4.	掌握项目研发流程和规范，熟悉系统项目的研发生命周期，掌握开发的过程和方法
+5.	设计并实现一种基于并行计算架构的平衡着色算法
+参考资料
+[1].	Hao Lu, Mahantesh Halappanavar, Daniel G. Chavarría-Miranda, Assefaw Hadish Gebremedhin, Ajay Panyala, Ananth Kalyanaraman: Algorithms for Balanced Graph Colorings with Applications in Parallel Computing. IEEE Trans. Parallel Distrib. Syst. 28(5): 1240-1256 (2017)
+[2].	Hao Lu, Mahantesh Halappanavar, Daniel G. Chavarría-Miranda, Assefaw Hadish Gebremedhin, Ananth Kalyanaraman: Balanced Coloring for Parallel Computing Applications. IPDPS 2015: 7-16
+[3].	Aijun Dong, Xin Zhang: Equitable coloring and equitable choosability of graphs with small maximum average degree. Discussiones Mathematicae Graph Theory 38(3): 829-839 (2018)
+[4].	Sudev Naduvath, K. P. Chithra, S. Satheesh, Johan Kok: On certain parameters of equitable coloring of graphs. Discrete Mathematics Algorithms and Applications 9(4): 1-11 (2017)
+[5].	R.M.R. Lewis. A guide to graph coloring: algorithms and applications. Springer. 2015

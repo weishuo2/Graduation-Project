@@ -1,0 +1,53 @@
+\section{Introduction}
+\label{intro}
+
+%define the problem, state the applications
+Given a graph $G = (V, E)$, where $V$ is the set of vertices and $E \subset V \times V$ is the set of edges. Two nodes $v_1, v_2 \in V$ are regarded as being adjacent to each other if $(v_1, v_2) \in E$, i.e., an edge exists between $v_1$ and $v_2$. Let $C$ be a set of colors. Graph coloring is a task of assigning each vertex $v \in V$ a color $c \in C$ such that there are no two adjacent vertices which have the same color and the number of different colors used, $|C|$, is as small as possible. Graph coloring is widely applied to the problems such as resource allocation and scheduling, time-tabling \cite{marx2004graph}, register allocation \& spilling~\cite{chaitin1986register}, and puzzle-solving (Sudoku) \cite{sudoku}.
+
+The smallest number of colors that is needed to color a graph is called \emph{Chromatic number, $\chi(G)$} \cite{west}. Determining $\chi(G)$ is an ``NP-complete'' problem. It is unlikely to find the optimal solution by any polynomial time-bounded algorithm. Hence, a practical approach to such a computationally intractable problem is to relax the optimality constraint and find the ``near-optimal'' solution \cite{Garey}. 
+%Instead of finding an optimal coloring, one might be perfectly willing to settle for a coloring which only uses ``close'' to the optimal number of colors \cite{Garey}. 
+Suppose $A$ is a coloring algorithm, and $A(G)$ is the number of colors used by algorithm $A$ on graph $G$.  The near-optimal solution can be defined as: finding an efficient coloring algorithm $A$ such that $A(G)/\chi(G)$ is close to 1. Several research studies have been conducted to use the heuristics and greedy approaches to perform near optimal coloring \cite{greedy}. However, due to the burgeoning size of real-world graphs, even the algorithms with the linear times need to resort to parallel computing to achieve practical soloving times. This paper aims to design an efficient parallel coloring algorithm that is able to find near optimal solutions. Particularly, since real-life graphs follow the power-law property, which can be found in varies graph applications such as social network and biomedical network analysis, and computational linguistics \cite{linguistics}, this paper focuses on accelerating graph coloring on power-law graphs.
+
+Graphic Processing Unit (GPU) is a promising device to accelerate graph coloring on large scale graphs, thanks to its massive degree of parallelism and high memory access bandwidth. However, inherent issues in graph processing such as random memory accesses and workload imbalance make it very challenging to fully utilize the parallel computing power of GPU. A significant amount of work has been carried out to develop new data layout models (Adjacency matrix, Adjacency List, Vector Graph, CSR), graph programming models (GAS, BSP), data layouts, memory access patterns, workload mapping in order to optimize graph processing on GPU. In graph coloring, although recent attempts \cite{Manycore,ppopp-11} have been made, unleashing the full power of GPU to achieve high-performance graph coloring still remains a great challenge.
+
+Previous studies have shown that it is hard to achieve good scalability and high performance on graph algorithms \cite{csur18}. %\cite{csur18,locality} 
+Despite the irregularity of memory accessing and data partition exists in graph algorithms, some state-of-the-art studies have made significant progress on CPU. With the increasing popularity of many-core accelerators, such as GPU and FPGA, more and more researchers have shifted their focus to improve the performance and and scalability of graph algorithms on these parallel architectures. 
+
+The most important difference between these many-core processing units and CPU is that the number of processing cores in many-core units increases dramatically.  Thus, it is extremely important to design the parallel algorithms with excellent thread scalability so as to match the great parallel processing potential of the many-core architectures.  
+
+From another angle, since graph coloring is a NP-complete problem, the solving speed (i.e., performance) of a near-optimal algorithm typically contradicts its solving quality. Therefore, it is important to strike a balance between performance and quality for the designed algorithms. 
+
+The parallel graph coloring algorithm designed in our work can achieve excellent tread scalability. Therefore, it is able to fully exploit the parallel processing power of GPU to deliver near-optimal solutions (i.e., using the near-optimal number of colors to color a given graph) with excellent performance.  
+
+In this paper, we propose a high performance two-stage graph coloring algorithm, called \textbf{Feluca}, which is custom-designed to unleash the full potential of GPU. In the first stage, Feluca adopts a recursive coloring algorithm to color a majority of vertices in a small number of iterations. To avoid the long tail phenomenon with the recursive coloring approach, Feluca switches to the sequential spread approach in the second stage. %greedy coloring technique. 
+
+Moreover, the following techniques are proposed to further improve the graph coloring performance. \romannumeral1) A new method is proposed to eliminate the cycles in the graph; \romannumeral2) a top-down scheme is developed to avoid the atomic operation originally required for color selection; and \romannumeral3) a novel coloring  paradigm is designed to improve the degree of parallelism for the sequential spread part. All these newly developed techniques, together with further GPU-specific optimizations such as coalesced memory access and workload balancing, comprise an efficient parallel graph coloring solution in Feluca.
+
+We have conducted extensive experiments on NVIDIA K20m GPU. The results show that Feluca can achieve 3.61--125.81$\times$ speedup over the greedy coloring algorithm and 18.58--71.07$\times$ speedup over the existing Jones-Plassman-Luby (JPL) coloring algorithm. 
+
+In Summary, our contributions are as follows:
+\begin{enumerate}
+	\item We present a \textbf{\emph{two-stage coloring algorithm on GPU, Feluca,}} 
+	which combines
+	the recursive approach (the first stage) with the sequential spread approach (the second stage). 
+	Feluca colors most vertices in a graph in the first stage and then transverse the remaining vertices in one go in the second stage.
+	Experimental results presented in section \ref{experiments} 
+	show that the proposed method can achieve up to 71.07$\times$ speedup over the JPL algorithm.
+	\item We design a \textbf{\emph{cycle elimination method}} to ease the process of spreading the color value in Feluca. Specifically Feluca changes the directed edge $<v_i, v_j>$ to $<v_j, v_i>$ if $i>j$, so as to 
+	eliminate the cyclic paths in a graph and avoid the infinite loops caused by cyclic sub-graphs. Based on the cycle elimination technique, we design a 
+	\textbf{\emph{top-down color selection scheme}} to select the 
+	suitable colors from the color array sequentially. Most existing coloring algorithms select the first available color from the color array for the current vertex, which generates many 
+	\emph{atomic} operations in order to ensure the correctness of the algorithms. In 
+	order to improve the efficiency of color selection, we propose a continuous top-down color 
+	selection scheme to select next color of the current vertex for the conflicting vertex.
+	\item We design a \textbf{\emph{color-centric paradigm}} to improve the degree of parallelism 
+	for the sequential spread stage. We allocate thread block(s) to process a color and organize these blocks in pipeline. 
+	With this pipeline mechanism, the results of the  $(i - 1)^{th}$ iteration can be easily used by the $i^{th}$ iteration.
+	\item We design a set of evaluation schemes for Feluca. The experimental results show that Feluca outperforms the existing algorithms by up to 96.73$\times$ on GPU.	
+\end{enumerate}
+The rest of this paper is organized as follows: Section \ref{motivation} demonstrates the performance 
+problem of graph coloring algorithm on GPU and  discusses the motivation of this research. Then the 
+algorithm design is presented in Section \ref{design}. Section \ref{optimization} presents the 
+optimization strategies for the proposed graph coloring algorithm. The overall performance of 
+Feluca is evaluated in Section \ref{experiments}. Section \ref{relatework} discusses the related work 
+and Section \ref{conclusion} concludes the paper and discusses future research opportunities.

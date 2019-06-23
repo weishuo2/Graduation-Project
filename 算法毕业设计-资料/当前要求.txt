@@ -1,0 +1,26 @@
+1.gpu架构(NVIDIA的官网特斯拉P100)
+2.图的数据的存储方法(发的中文文档)
+3.图的基本特性(同2)
+4.常用的并行的着色算法(不多，自己找DBLP，学长发)
+
+翻译文献学长发。
+
+图在内存中的适合着色的存储方式。着色算法的设计流程。
+存储方式需要贴合于着色算法的具体思路，让其速度够快。先看算法再选。CSR已有的存储方式。
+代码在从TXT中读到存储方式中，其次是算法的改进。
+
+文档中有一篇完整的思路相似的论文，但是解决的问题不是染色问题而已。
+
+1.关于图和图结构的资料
+你可以先看这个中文的这一章，看起来比较快，有问题的话可以直接问我，
+或者查看一下MIT这个课程上列出来的文献。
+最好是对照着代码来看，大部分系统的代码都在github上开源了
+mit课程：https://people.csail.mit.edu/jshun/6886-s18/
+
+2.关于GPU的资料
+关于GPU P100：https://www.nvidia.com/en-us/data-center/tesla-p100/
+
+3.需要翻译的文档为Enterprise.pdf
+不知道啥意思
+Alternatively, another work [33] generates the frontier queue with warp and historical culling, but again this approach could not completely avoid duplicated vertices across warps being enqueued. 
+长尾是什么？

@@ -1,0 +1,23 @@
+1.中介中心性
+2.亲密中心性
+
+了解下GPU的架构
+SP：最基本的处理单元，streaming processor，也称为CUDA core。
+最后具体的指令和任务都是在SP上处理的。GPU进行并行计算，也就是很多个SP同时做处理。
+
+SM：多个SP加上其他的一些资源组成一个streaming multiprocessor。也叫GPU大核，
+其他资源如：warp scheduler，register，shared memory等。SM可以看做GPU的心脏
+
+
+3.流媒体处理器（SMX）
+4.thread  warp 协作线程数组(CTA) grid
+5.NVIDIA工具，即， nvprof和nvvp
+
+一个SP可以执行一个thread，但是实际上并不是所有的thread能够在同一时刻执行。
+每个thread拥有它自己的程序计数器和状态寄存器，并且用该线程自己的数据执行指令
+Nvidia把32个threads组成一个warp，warp是调度和运行的基本单元。
+warp中所有threads并行的执行相同的指令。
+一个warp需要占用一个SM运行，多个warps需要轮流进入SM。
+由SM的硬件warp scheduler负责调度。
+目前每个warp包含32个threads（NVIDIA保留修改数量的权利）。
+所以，一个GPU上resident thread最多只有 SM*warp个。

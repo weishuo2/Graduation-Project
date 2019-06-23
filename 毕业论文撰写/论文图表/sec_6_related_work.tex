@@ -1,0 +1,34 @@
+\section{Related Work}
+\label{relatework}
+Most previous research conducted on graph coloring 
+focus on the algorithm design and how to find the chromatic 
+number \cite{topc,cor}. FastColor is an iteration-based graph 
+coloring algorithm for very large graphs \cite{ijcai-17}. FastColor 
+sets the lower bound by finding the clique of the working graph $G_k$, which is reduced from the given graph $G$ and becomes smaller during the 
+execution of the algorithm. FastColor sets the upper bound by coloring the $G_m$, which 
+collects all the vertices and edges that are removed from the given graph 
+$G$. By iteratively coloring the $G_k$ and $G_m$, FastColor can obtain the 
+final color plan once the upper bound meets the lower bound. Experimental 
+results show that FastColor can color the graph with ten million vertices 
+and one hundred million edges in several minutes. 
+
+Focusing on the dynamic graph coloring problem, the work in \cite{vldbcolor} proposed a 
+color-propagation based algorithm which colors the vertices according to 
+the propagation order of vertices. The authors use a directed acyclic graph as 
+the auxiliary graph of the given graph. The authors color the auxiliary graph 
+first by exploring all vertices in 2-hop neighbors of the active 
+vertices. In the color-propagation based algorithm, the vertices need to be 
+recolored only if the in-neighbors have been changed. Experimental results 
+show that the algorithm can color the graph with ten million vertices 
+and one hundred million edges in seconds. 
+
+The work in \cite{ppopp-11} evaluated the features of graph coloring on GPU, which provides some insightful
+research directions for other researchers. Reference \cite{sc-16} studied the graph coloring problem and applied it to the infrastructure-level 
+online analytic design space. cuSPARSE library \cite{nvidiaTR} is a basic linear 
+algebra subroutines developed by NVIDIA. cuSPARSE contains a set of graph processing tools, including the graph coloring algorithm, which is the only 
+publicly-available coloring library for SIMD architectures to date. 
+Reference \cite{Manycore} proposed a parallel coloring 
+algorithm on manycore architectures and the authors implemented the algorithm 
+on the kokkos library \cite{kokkos}, which can be executed on both Xeon Phi and 
+GPU with different compile options. Experimental results shows the proposed 
+algorithm can achieve up to 1.5$\times$ speed up over cuSPARSE.

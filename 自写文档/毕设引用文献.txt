@@ -1,0 +1,33 @@
+kokkos：
+[2]M. Deveci, E. G. Boman, K. D. Devine, and S. Rajamanickam. 2016. Parallel Graph Coloring for Manycore Architectures. In 2016 IEEE International Parallel and Distributed Processing Symposium (IPDPS’ 16). 892–901. https://doi.org/10.1109/IPDPS.2016.54.
+以顶点为中心：相对于GM做优化，使用更小的平衡数组，用于平衡着色数和效率。或者使用位操作来进行颜色选择。
+以边为中心：类似于学长的pagerank，不过在颜色选择时不是单纯的+1，而是使用颜色禁止表。
+动态工作列表，即还未着色的顶点组成的列表。
+
+firstcolor：
+[11]Jinkun Lin, Shaowei Cai, Chuan Luo, and Kaile Su. 2017. A Reduction based Method for Coloring Very Large Graphs. In Proceedings of the Twenty-Sixth International Joint Conference on Artifcial Intelligence, IJCAI-17. 517–523. https://doi.org/10.24963/ijcai.2017/73.
+顶点群内顶点均相互连接，独立集内顶点均相互不连接。
+如果独立集内的每一个点的度数都小于k，则称之为k度独立集。
+寻找计算下限，减小图的规模，对图进行着色。直至时间到，或者找到最佳着色方案。
+ Given a graph G = (V; E) and an ‘-degree bounded independent set I in it, and χ(G) ≥ ‘,
+1) if χ(G[V \ I]) < ‘, then χ(G) = ‘.
+2) if χ(G[V \ I]) ≥ ‘, then χ(G) = χ(G[V \ I]).
+
+二跳顶点：
+[14]Long Yuan, Lu Qin, Xuemin Lin, Lijun Chang, and Wenjie Zhang. 2017. E?ective and Efcient Dynamic Graph Coloring. Proceedings of the VLDB Endowment 11,3 (Nov. 2017), 338–351. https://doi.org/10.14778/3157794.3157802.
+Global的工作：按照顶点的降序对顶点进行排序，度数一样，id小的顶点在前面。顺序迭代，为每个顶点指定未分配给其已着色邻居的最小可能颜色
+DAG有向无环图，OCG定向着色图。
+收集邻接点颜色，选取最小可用色号，改变颜色后通知邻接点。
+关键是起始顶点的选择。插入边时，将两个顶点及其邻接点视为起始点。删除边时，将两个点视为起始点。
+
+一个应用：
+[13]S. Sallinen, K. Iwabuchi, S. Poudel, M. Gokhale, M. Ripeanu, and R. Pearce.2016. Graph Colouring as a Challenge Problem for Dynamic Graph Processing on Distributed Systems. In Proceedings of the International Conference on High Performance Computing,Networking,StorageandAnalysis(SC’16).347358.https://doi.org/10.1109/SC.2016.29.
+包含了动态图着色，动态修改图的结构调整着色方案。分布式算法，用比自己优先级高的顶点数作为基数，每有一个基数顶点被着色就减一，并记录不能用的颜色，然后为0时可以自己着色。
+JPL：基于独立集，随机给未着色顶点一个值，选择所有比其邻接点都大的顶点，他们在一个独立集中。缺点在于独立集每次并不是选的最大的，颜色也不一定最少。
+cusparse的csrcolor函数：基于JP，对顶点ID生成哈希值，使用了多个哈希函数，最大和最小的顶点都生成独立集。独立集更大。
+sp与sm：每个sp处理一个线程，sm处理多个，每次一个warp。一个block必然只会在一个sm上分次运行完。
+
+切换过程也有预处理
+block设置大小为256，grid设置为最大值/256
+makefile文件就是从上至下，依次写编译依赖的文件
+nvprof 后接正常的运行语句，可以加参数

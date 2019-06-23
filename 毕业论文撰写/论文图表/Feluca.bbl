@@ -1,0 +1,501 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{30}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{Addario-Berry, Bhamidi, Bubeck, Devroye,
+  Lugosi, and Oliveira}{Addario-Berry et~al\mbox{.}}{2015}]%
+        {vctheory}
+\bibfield{author}{\bibinfo{person}{Louigi Addario-Berry},
+  \bibinfo{person}{Shankar Bhamidi}, \bibinfo{person}{S{\'e}bastien Bubeck},
+  \bibinfo{person}{Luc Devroye}, \bibinfo{person}{G\'{a}bor Lugosi}, {and}
+  \bibinfo{person}{Roberto~Imbuzeiro Oliveira}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{Exceptional Rotations of Random Graphs: A VC
+  Theory}.
+\newblock \bibinfo{journal}{\emph{J. Mach. Learn. Res.}} \bibinfo{volume}{16},
+  \bibinfo{number}{1} (\bibinfo{date}{Jan.} \bibinfo{year}{2015}),
+  \bibinfo{pages}{1893--1922}.
+\newblock
+\showISSN{1532-4435}
+\urldef\tempurl%
+\url{http://dl.acm.org/citation.cfm?id=2789272.2886810}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Arora and Chlamtac}{Arora and
+  Chlamtac}{2006}]%
+        {stoc06}
+\bibfield{author}{\bibinfo{person}{Sanjeev Arora} {and} \bibinfo{person}{Eden
+  Chlamtac}.} \bibinfo{year}{2006}\natexlab{}.
+\newblock \showarticletitle{New Approximation Guarantee for Chromatic Number}.
+  In \bibinfo{booktitle}{\emph{Proceedings of the Thirty-eighth Annual ACM
+  Symposium on Theory of Computing}} \emph{(\bibinfo{series}{STOC '06})}.
+  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{215--224}.
+\newblock
+\showISBNx{1-59593-134-1}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/1132516.1132548}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Barenboim and Elkin}{Barenboim and
+  Elkin}{2011}]%
+        {jacm11}
+\bibfield{author}{\bibinfo{person}{Leonid Barenboim} {and}
+  \bibinfo{person}{Michael Elkin}.} \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Deterministic Distributed Vertex Coloring in
+  Polylogarithmic Time}.
+\newblock \bibinfo{journal}{\emph{J. ACM}} \bibinfo{volume}{58},
+  \bibinfo{number}{5}, Article \bibinfo{articleno}{23} (\bibinfo{date}{Oct.}
+  \bibinfo{year}{2011}), \bibinfo{numpages}{25}~pages.
+\newblock
+\showISSN{0004-5411}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/2027216.2027221}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Barenboim, Elkin, and Maimon}{Barenboim
+  et~al\mbox{.}}{2017}]%
+        {podc17}
+\bibfield{author}{\bibinfo{person}{Leonid Barenboim}, \bibinfo{person}{Michael
+  Elkin}, {and} \bibinfo{person}{Tzalik Maimon}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Deterministic Distributed (Delta +
+  O(Delta))-Edge-Coloring, and Vertex-Coloring of Graphs with Bounded
+  Diversity}. In \bibinfo{booktitle}{\emph{Proceedings of the ACM Symposium on
+  Principles of Distributed Computing}} \emph{(\bibinfo{series}{PODC '17})}.
+  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{175--184}.
+\newblock
+\showISBNx{978-1-4503-4992-5}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/3087801.3087812}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Chaitin}{Chaitin}{1986}]%
+        {chaitin1986register}
+\bibfield{author}{\bibinfo{person}{Gregory~J Chaitin}.}
+  \bibinfo{year}{1986}\natexlab{}.
+\newblock \bibinfo{title}{Register allocation and spilling via graph coloring}.
+\newblock
+\newblock
+\newblock
+\shownote{US Patent 4,571,678.}
+
+
+\bibitem[\protect\citeauthoryear{Chartrand and Zhang}{Chartrand and
+  Zhang}{2017}]%
+        {west}
+\bibfield{author}{\bibinfo{person}{Gary Chartrand} {and} \bibinfo{person}{Ping
+  Zhang}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Introduction to Graph Theory}}.
+\newblock \bibinfo{publisher}{McGraw Hill Education}. 191--232 pages.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Deveci, Boman, Devine, and
+  Rajamanickam}{Deveci et~al\mbox{.}}{2016}]%
+        {Manycore}
+\bibfield{author}{\bibinfo{person}{M. Deveci}, \bibinfo{person}{E.~G. Boman},
+  \bibinfo{person}{K.~D. Devine}, {and} \bibinfo{person}{S. Rajamanickam}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Parallel Graph Coloring for Manycore
+  Architectures}. In \bibinfo{booktitle}{\emph{2016 IEEE International Parallel
+  and Distributed Processing Symposium}} \emph{(\bibinfo{series}{IPDPS' 16})}.
+  \bibinfo{pages}{892--901}.
+\newblock
+\showISSN{1530-2075}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/IPDPS.2016.54}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{di~Scienze dell'Informazione of the
+  Università degli studi~di Milano}{di~Scienze dell'Informazione of the
+  Università degli studi~di Milano}{2002}]%
+        {law}
+\bibfield{author}{\bibinfo{person}{Dipartimento di~Scienze dell'Informazione of
+  the Università degli studi~di Milano}.} \bibinfo{year}{2002}\natexlab{}.
+\newblock \bibinfo{title}{Laboratory for Web Algorithmics}.
+\newblock \bibinfo{howpublished}{\url{http://law.di.unimi.it/index.php}}.
+\newblock
+\newblock
+\shownote{Accessed July 17, 2018.}
+
+
+\bibitem[\protect\citeauthoryear{Edwards, Trott, and Sunderland}{Edwards
+  et~al\mbox{.}}{2014}]%
+        {kokkos}
+\bibfield{author}{\bibinfo{person}{H.~Carter Edwards},
+  \bibinfo{person}{Christian~R. Trott}, {and} \bibinfo{person}{Daniel
+  Sunderland}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Kokkos: Enabling manycore performance portability
+  through polymorphic memory access patterns}.
+\newblock \bibinfo{journal}{\emph{J. Parallel and Distrib. Comput.}}
+  \bibinfo{volume}{74}, \bibinfo{number}{12} (\bibinfo{year}{2014}),
+  \bibinfo{pages}{3202 -- 3216}.
+\newblock
+\showISSN{0743-7315}
+\urldef\tempurl%
+\url{https://doi.org/10.1016/j.jpdc.2014.07.003}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Garey and Johnson}{Garey and Johnson}{1976}]%
+        {Garey}
+\bibfield{author}{\bibinfo{person}{M.~R. Garey} {and} \bibinfo{person}{D.~S.
+  Johnson}.} \bibinfo{year}{1976}\natexlab{}.
+\newblock \showarticletitle{The Complexity of Near-Optimal Graph Coloring}.
+\newblock \bibinfo{journal}{\emph{J. ACM}} \bibinfo{volume}{23},
+  \bibinfo{number}{1} (\bibinfo{date}{Jan.} \bibinfo{year}{1976}),
+  \bibinfo{pages}{43--49}.
+\newblock
+\showISSN{0004-5411}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/321921.321926}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Ghaffari, Hirvonen, Kuhn, and Maus}{Ghaffari
+  et~al\mbox{.}}{2018}]%
+        {podc18}
+\bibfield{author}{\bibinfo{person}{Mohsen Ghaffari}, \bibinfo{person}{Juho
+  Hirvonen}, \bibinfo{person}{Fabian Kuhn}, {and} \bibinfo{person}{Yannic
+  Maus}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Improved Distributed Delta-Coloring}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 2018 ACM Symposium on Principles
+  of Distributed Computing}} \emph{(\bibinfo{series}{PODC '18})}.
+  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{427--436}.
+\newblock
+\showISBNx{978-1-4503-5795-1}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/3212734.3212764}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Grosset, Zhu, Liu, Venkatasubramanian, and
+  Hall}{Grosset et~al\mbox{.}}{2011}]%
+        {ppopp-11}
+\bibfield{author}{\bibinfo{person}{A.V.~Pascal Grosset},
+  \bibinfo{person}{Peihong Zhu}, \bibinfo{person}{Shusen Liu},
+  \bibinfo{person}{Suresh Venkatasubramanian}, {and} \bibinfo{person}{Mary
+  Hall}.} \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Evaluating Graph Coloring on GPUs}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 16th ACM SIGPLAN Symposium on
+  Principles and Practice of Parallel Programming}}
+  \emph{(\bibinfo{series}{PPoPP' 11})}. \bibinfo{pages}{297--298}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Heidari, Simmhan, Calheiros, and
+  Buyya}{Heidari et~al\mbox{.}}{2018}]%
+        {csur18}
+\bibfield{author}{\bibinfo{person}{Safiollah Heidari}, \bibinfo{person}{Yogesh
+  Simmhan}, \bibinfo{person}{Rodrigo~N. Calheiros}, {and}
+  \bibinfo{person}{Rajkumar Buyya}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Scalable Graph Processing Frameworks: A Taxonomy
+  and Open Challenges}.
+\newblock \bibinfo{journal}{\emph{Comput. Surveys}} \bibinfo{volume}{51},
+  \bibinfo{number}{3}, Article \bibinfo{articleno}{60} (\bibinfo{date}{June}
+  \bibinfo{year}{2018}), \bibinfo{numpages}{53}~pages.
+\newblock
+\showISSN{0360-0300}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/3199523}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Herzberg and Murty}{Herzberg and
+  Murty}{2007}]%
+        {sudoku}
+\bibfield{author}{\bibinfo{person}{Agnes~M. Herzberg} {and}
+  \bibinfo{person}{M.~Ram Murty}.} \bibinfo{year}{2007}\natexlab{}.
+\newblock \showarticletitle{Sudoku Squares and Chromatic Polynomials}.
+\newblock \bibinfo{journal}{\emph{Notices of the American Mathematical
+  Society}}  \bibinfo{volume}{54} (\bibinfo{date}{June/July}
+  \bibinfo{year}{2007}), \bibinfo{pages}{708--717}.
+\newblock
+Issue 6.
+\urldef\tempurl%
+\url{http://www.ams.org/notices/200706/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Husfeldt}{Husfeldt}{2015}]%
+        {recursion}
+\bibfield{author}{\bibinfo{person}{Thore Husfeldt}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Topics in Chromatic Graph Theory}}.
+\newblock \bibinfo{publisher}{Cambridge University Press}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{KALER, HASENPLAUGH, SCHARDL, and
+  LEISERSON}{KALER et~al\mbox{.}}{2016}]%
+        {topc}
+\bibfield{author}{\bibinfo{person}{TIM KALER}, \bibinfo{person}{WILLIAM
+  HASENPLAUGH}, \bibinfo{person}{TAO~B. SCHARDL}, {and}
+  \bibinfo{person}{CHARLES~E. LEISERSON}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Executing Dynamic Data-Graph Computations
+  Deterministically Using Chromatic Scheduling}.
+\newblock \bibinfo{journal}{\emph{ACM Transactions on Parallel Computing}}
+  \bibinfo{volume}{3}, \bibinfo{number}{1} (\bibinfo{date}{July}
+  \bibinfo{year}{2016}), \bibinfo{pages}{1--31}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1145/2896850}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Khorasani, Gupta, and Bhuyan}{Khorasani
+  et~al\mbox{.}}{2015}]%
+        {pactsimd}
+\bibfield{author}{\bibinfo{person}{Farzad Khorasani}, \bibinfo{person}{Rajiv
+  Gupta}, {and} \bibinfo{person}{Laxmi~N. Bhuyan}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{Scalable SIMD-Efficient Graph Processing on GPUs}.
+  In \bibinfo{booktitle}{\emph{Proceedings of the 2015 International Conference
+  on Parallel Architecture and Compilation}} \emph{(\bibinfo{series}{PACT
+  '15})}. \bibinfo{publisher}{IEEE Computer Society},
+  \bibinfo{address}{Washington, DC, USA}, \bibinfo{pages}{39--50}.
+\newblock
+\showISBNx{978-1-4673-9524-3}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/PACT.2015.15}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Kothapalli and Pemmaraju}{Kothapalli and
+  Pemmaraju}{2011}]%
+        {podc11}
+\bibfield{author}{\bibinfo{person}{Kishore Kothapalli} {and}
+  \bibinfo{person}{Sriram Pemmaraju}.} \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Distributed Graph Coloring in a Few Rounds}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 30th Annual ACM SIGACT-SIGOPS
+  Symposium on Principles of Distributed Computing}}
+  \emph{(\bibinfo{series}{PODC '11})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{31--40}.
+\newblock
+\showISBNx{978-1-4503-0719-2}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/1993806.1993812}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Kubale}{Kubale}{2004}]%
+        {sequential}
+\bibfield{author}{\bibinfo{person}{Marek Kubale}.}
+  \bibinfo{year}{2004}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Graph Colorings}}.
+\newblock \bibinfo{publisher}{American Mathematical Society}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Leskovec}{Leskovec}{2009}]%
+        {snap}
+\bibfield{author}{\bibinfo{person}{Jure Leskovec}.}
+  \bibinfo{year}{2009}\natexlab{}.
+\newblock \bibinfo{title}{Stanford Network Analysis Project}.
+\newblock \bibinfo{howpublished}{\url{http://snap.stanford.edu/index.html}}.
+\newblock
+\newblock
+\shownote{Accessed July 11, 2018.}
+
+
+\bibitem[\protect\citeauthoryear{Lewis, Thompson, Mumford, and Gillard}{Lewis
+  et~al\mbox{.}}{2012}]%
+        {cor}
+\bibfield{author}{\bibinfo{person}{Rhyd Lewis}, \bibinfo{person}{Jonathan~M.
+  Thompson}, \bibinfo{person}{Christine~L. Mumford}, {and} \bibinfo{person}{J.
+  Gillard}.} \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{A wide-ranging computational comparison of
+  high-performance graph colouring algorithms}.
+\newblock \bibinfo{journal}{\emph{Computers \& Operations Research}}
+  \bibinfo{volume}{39}, \bibinfo{number}{9} (\bibinfo{date}{January}
+  \bibinfo{year}{2012}), \bibinfo{pages}{1933--1950}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Lin, Cai, Luo, and Su}{Lin
+  et~al\mbox{.}}{2017}]%
+        {ijcai-17}
+\bibfield{author}{\bibinfo{person}{Jinkun Lin}, \bibinfo{person}{Shaowei Cai},
+  \bibinfo{person}{Chuan Luo}, {and} \bibinfo{person}{Kaile Su}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{A Reduction based Method for Coloring Very Large
+  Graphs}. In \bibinfo{booktitle}{\emph{Proceedings of the Twenty-Sixth
+  International Joint Conference on Artificial Intelligence, {IJCAI-17}}}.
+  \bibinfo{pages}{517--523}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.24963/ijcai.2017/73}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Manning, Surdeanu, Bauer, Finkel, Bethard, and
+  McClosky}{Manning et~al\mbox{.}}{2014}]%
+        {linguistics}
+\bibfield{author}{\bibinfo{person}{Christopher~D Manning},
+  \bibinfo{person}{Mihai Surdeanu}, \bibinfo{person}{John Bauer},
+  \bibinfo{person}{Jenny~Rose Finkel}, \bibinfo{person}{Steven Bethard}, {and}
+  \bibinfo{person}{David McClosky}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{The Stanford CoreNLP Natural Language Processing
+  Toolkit}. In \bibinfo{booktitle}{\emph{Proceedings of the 52nd Annual Meeting
+  of the Association for Computational Linguistics}}
+  \emph{(\bibinfo{series}{ACL '14})}. \bibinfo{publisher}{Association for
+  Computational Linguistics}, \bibinfo{pages}{55--60}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Marx}{Marx}{2004}]%
+        {marx2004graph}
+\bibfield{author}{\bibinfo{person}{D{\'a}niel Marx}.}
+  \bibinfo{year}{2004}\natexlab{}.
+\newblock \showarticletitle{Graph colouring problems and their applications in
+  scheduling}.
+\newblock \bibinfo{journal}{\emph{Periodica Polytechnica Electrical
+  Engineering}} \bibinfo{volume}{48}, \bibinfo{number}{1-2}
+  (\bibinfo{year}{2004}), \bibinfo{pages}{11--16}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Ümit V.~Çatalyürek, Feo, Gebremedhin,
+  Halappanavar, and Pothen}{Ümit V.~Çatalyürek et~al\mbox{.}}{2012}]%
+        {iterative}
+\bibfield{author}{\bibinfo{person}{Ümit V.~Çatalyürek},
+  \bibinfo{person}{John Feo}, \bibinfo{person}{Assefaw~H. Gebremedhin},
+  \bibinfo{person}{Mahantesh Halappanavar}, {and} \bibinfo{person}{Alex
+  Pothen}.} \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{Graph coloring algorithms for multi-core and
+  massively multithreaded architectures}.
+\newblock \bibinfo{journal}{\emph{Parallel Comput.}} \bibinfo{volume}{38},
+  \bibinfo{number}{10} (\bibinfo{year}{2012}), \bibinfo{pages}{576 -- 594}.
+\newblock
+\showISSN{0167-8191}
+\urldef\tempurl%
+\url{https://doi.org/10.1016/j.parco.2012.07.001}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Naumov, Castonguay, and Cohen}{Naumov
+  et~al\mbox{.}}{2015}]%
+        {nvidiaTR}
+\bibfield{author}{\bibinfo{person}{Maxim Naumov}, \bibinfo{person}{Patrice
+  Castonguay}, {and} \bibinfo{person}{Jonathan Cohen}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Parallel Graph Coloring with Applications
+  to the Incomplete-LU Factorization on the GPU}}.
+\newblock \bibinfo{type}{Technical Report} NVR-2015-001.
+  \bibinfo{institution}{NVIDIA}. \bibinfo{pages}{23} pages.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Rok and Walczak}{Rok and Walczak}{2014}]%
+        {socg14}
+\bibfield{author}{\bibinfo{person}{Alexandre Rok} {and}
+  \bibinfo{person}{Bartosz Walczak}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Outerstring Graphs are $\chi$-bounded}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the Thirtieth Annual Symposium on
+  Computational Geometry}} \emph{(\bibinfo{series}{SOCG'14})}.
+  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA}, Article
+  \bibinfo{articleno}{136}, \bibinfo{numpages}{8}~pages.
+\newblock
+\showISBNx{978-1-4503-2594-3}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/2582112.2582115}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Sallinen, Iwabuchi, Poudel, Gokhale, Ripeanu,
+  and Pearce}{Sallinen et~al\mbox{.}}{2016}]%
+        {sc-16}
+\bibfield{author}{\bibinfo{person}{S. Sallinen}, \bibinfo{person}{K. Iwabuchi},
+  \bibinfo{person}{S. Poudel}, \bibinfo{person}{M. Gokhale},
+  \bibinfo{person}{M. Ripeanu}, {and} \bibinfo{person}{R. Pearce}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Graph Colouring as a Challenge Problem for Dynamic
+  Graph Processing on Distributed Systems}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the International Conference on High
+  Performance Computing, Networking, Storage and Analysis}}
+  \emph{(\bibinfo{series}{SC' 16})}. \bibinfo{pages}{347--358}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1109/SC.2016.29}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Taş, Kaya, and Saule}{Taş
+  et~al\mbox{.}}{2017}]%
+        {greedy}
+\bibfield{author}{\bibinfo{person}{M.~K. Taş}, \bibinfo{person}{K. Kaya},
+  {and} \bibinfo{person}{E. Saule}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Greed Is Good: Parallel Algorithms for
+  Bipartite-Graph Partial Coloring on Multicore Architectures}. In
+  \bibinfo{booktitle}{\emph{2017 46th International Conference on Parallel
+  Processing (ICPP)}}. \bibinfo{pages}{503--512}.
+\newblock
+\showISSN{2332-5690}
+\urldef\tempurl%
+\url{https://doi.org/10.1109/ICPP.2017.59}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Yuan, Qin, Lin, Chang, and Zhang}{Yuan
+  et~al\mbox{.}}{2017}]%
+        {vldbcolor}
+\bibfield{author}{\bibinfo{person}{Long Yuan}, \bibinfo{person}{Lu Qin},
+  \bibinfo{person}{Xuemin Lin}, \bibinfo{person}{Lijun Chang}, {and}
+  \bibinfo{person}{Wenjie Zhang}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Effective and Efficient Dynamic Graph Coloring}.
+\newblock \bibinfo{journal}{\emph{Proceedings of the VLDB Endowment}}
+  \bibinfo{volume}{11}, \bibinfo{number}{3} (\bibinfo{date}{Nov.}
+  \bibinfo{year}{2017}), \bibinfo{pages}{338--351}.
+\newblock
+\showISSN{2150-8097}
+\urldef\tempurl%
+\url{https://doi.org/10.14778/3157794.3157802}
+\showDOI{\tempurl}
+
+
+\end{thebibliography}

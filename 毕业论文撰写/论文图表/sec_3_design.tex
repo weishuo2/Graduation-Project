@@ -1,0 +1,132 @@
+\section{Algorithm Design}
+\label{design}
+
+This section presents the design philosophy and describes the algorithm in Feluca.
+
+\subsection{Design Philosophy}
+\label{philosophy}
+
+Most of previous coloring research focus on reducing
+the number of the colors \cite{vctheory,stoc06,socg14}, which indicates the 
+effectiveness of the algorithm. However, improving the coloring efficiency is 
+also an important research topic \cite{podc11,jacm11,podc17,podc18}. Most research in this aspect uses either the sequential spread or the recursion-based 
+model. However, either of these two models has its own 
+limits, as discussed in the motivation section.
+
+In this work, we address the problem in the existing coloring approaches. We present a new
+high performance graph coloring algorithm on GPU, the fundamental idea of which is to combine the advantages 
+of the recursion and the sequential spread model and avoid their 
+drawbacks. 
+
+On the other hand, real-world graphs are growing bigger and bigger, and the graph structure 
+is also skewed. another design philosophy of our algorithm is to color as many vertices 
+as possible in a round and ensure the scalability of the 
+algorithm. 
+
+In summary, there are two targets for our algorithm: i) 
+maintaining the coloring effectiveness (with a coloring plan no worse than the existing research) while improving the coloring efficiency (color the graphs faster than current methods), and ii) designing a scalable algorithm, which can easily scale to the system of multi-GPUs for processing large-scale graphs.
+
+In order to meet the above two targets, Feluca has two stages: beginning with the recursion execution model, which can color a majority of vertices in the first few iterations, and then switching to the 
+sequential spread execution model once too many conflicts occur. We also propose a novel color-centric coloring paradigm to 
+improve the degree of parallelism in the sequential spread stage. 
+
+Further, we develop several GPU-specific optimization techniques including
+coalesced memory access and workload balancing, which is presented in Section 4.
+
+All these techniques together comprise an efficient parallel graph coloring 
+solution in Feluca. We have conducted extensive experiments on NVIDIA K20m GPU. The results 
+show that Feluca can achieve 3.61--125.81$\times$ and 18.58--71.07$\times$ speedup over the greedy coloring algorithm and 
+ the existing Jones-Plassman-Luby (JPL) coloring algorithm, respectively. 
+
+
+\subsection{Two-Stage Graph Coloring Algorithm}
+\label{two-stage}
+
+The two-stage graph coloring algorithm is outlined in algorithm %\ref{alg:two-stage}, 
+\ref{alg:feluca}. The coloring processing starts on the host. The color array and the graph topology data are then loaded on GPU for coloring. 
+
+\begin{algorithm}[h]
+	\caption{Feluca: A High-Performance Graph Coloring Algorithm}
+	\label{alg:feluca}
+		\begin{algorithmic}[1] %每行显示行号
+		\Require Graph, $G$; $fraction$
+		\Ensure Graph coloring plan, $COLORS$; and the colors $color\_num$ used for coloring graph $G$;
+		\Function {RecursionExec}{$G$}
+			\State C(G) $\leftarrow$ init\_color\_randomly(G);
+			\While {continue\_flag \&\&  $\frac{colored vertices}{Total vertices} \leq  fraction$}
+				\While {$v_j \in V_i$ \&\& $i < j$}
+					\If{$c_i == c_j$}
+						\State {update $c_j$};
+					\EndIf
+				\EndWhile
+				\If{$continue\_flag$}
+					\State ParallelSequentialExec(G);
+				\EndIf
+			\EndWhile
+		\EndFunction
+		\Function {ParallelSequentialExec}{$G$}
+			\State C(G) $\leftarrow$ init\_color\_randomly(G);
+				\While {$continue\_flag$}
+					\State traverse\_vertex\_dest(row\_ptr[i], colors);
+					\State traverse\_vertex\_src(col\_ptr[i], colors);
+					\State row\_ptr[i] $\leftarrow$ colors[i];
+					\State col\_ptr[i] $\leftarrow$ colors[j];
+				\EndWhile
+			\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+
+In Feluca, we maintain a read-only color array, denoted by \emph{COLORS}, which can be visited by all 
+threads. In order to eliminate the conflicts which are caused by the cyclic paths in the graph, we 
+change the undirected graph to the directed graph, and set the vertices with lower 
+vertex IDs as the source vertices and the vertices with higher vertex ID as destinations.
+In our algorithm, we initialize the colors of all the vertices in \emph{COLORS} randomly. 
+We define $V_i$ as the set of neighbours of vertex $v_i$ and $c_i$ as the color of $v_i$. 
+In the recursion loop, vertex $v_i$ broadcast its own color $c_i$ to its neighbours in $V_i$ following the edges' directions. Once vertex $v_j \in V_i$ receives the color from vertex $v_i$, it compares its color $c_j$ with $c_i$. The comparisons conducted by different vertices are conducted in parallel. If $c_j = c_i$, $v_j$ selects a new color from the \emph{COLORS} array and updates $c_j$. The process repeats until the colors of all vertices in $V_i$ are different 
+with the color of $v_i$. 
+
+In the sequential spread stage, %Feluca initialized the graph by using the coloring result of the recursion loop. 
+Feluca generates a block of threads and scans the remaining vertices in parallel to find the suitable vertices for each color. In order to improve the degree of parallelism for this algorithm and avoid the conflicts, Feluca assigns a block of threads for each color. The thread blocks for different colors are put into execution in a pipeline. The late blocks can use the coloring results of the early blocks in the pipeline. By doing so, the conflicts in the sequential spread model can also be avoided. 
+
+$N_i$ and $t_i$ denote the colored vertices and the time spent in iteration $i$. $s_i = N_i / {t_i}$ can then be used to express the coloring speed in iteration $i$. The coloring rate (i.e., the percentage of the vertices that have been colored) up to iteration $i$ can be expressed by Equation \ref{eq:lamda}, where $N$ is the total number of vertices in the graph. 
+
+\begin{equation}
+\label{eq:lamda}
+\lambda = \frac{\sum_{j=1}^{i}{N_j}}{N}
+\end{equation}
+
+
+Feluca switches to the sequential spread coloring method once the color rate ($\lambda$) in the recursion stage is lower than the value of the parameter $fraction$. $T$ denotes the total coloring time. We can have $T=\sum_{i=1}^{r}{t_i}+\sum_{j=r+1}^{r+s}{t_j}$, where $r$ is the number of iterations in the recursion stage while $s$ is the number of iterations in the sequential spread stage. 
+%$V_R$ and $V_S$ denote the number of colored vertices in the recursion stage and the sequential spread stage, respectively. 
+%We have $V_R= \sum_{i=1}^{r}{N_i} =\lambda N $, and $ V_S = \sum_{j=1}^{s}{N_j}=(1-\lambda)N$. Hence, $T = \lambda f(s_r) t_r + (1- \lambda) f(s_s) t_s$, which is a convex optimization problem and there exist an appropriate $\lambda = fraction$ to make $T$ get its minimum value, we will show how can we choose a suitable $fraction$ in section \ref{experiments}, where $f(s_r)$, $f(s_s)$ and $t_r$, $t_s$ are the coloring speed and average coloring time for each iteration of recursion and sequential spread stage respectively.
+Hence, we can express the coloring time as formula \ref{eq1}.
+
+\begin{equation}
+\label{eq1}
+		T=\sum_{i=1}^{r}{t_i}+\sum_{j=r+1}^{r+s}{t_j}=\sum_{i=1}^{r}\frac{N_i}{s_i}+\sum_{j=r+1}^{r+s}\frac{N_j}{s_j}
+\end{equation}
+
+Furthermore, we use $s_{rmin}$, $s_{rmax}$ and $s_{smin}$, $s_{smax}$ to denote the minimum and maximum value of the coloring speed at recursion and sequential spread stage, respectively. Then we can express $T$ as formula \ref{eqt}.
+
+\begin{equation}
+\label{eqt}
+		\sum_{i=1}^{r}\frac{N_i}{s_{rmax}}+\sum_{j=r+1}^{r+s}\frac{N_j}{s_{smax}} \leq T \leq \sum_{i=1}^{r}\frac{N_i}{s_{rmin}}+\sum_{j=r+1}^{r+s}\frac{N_j}{s_{smin}}
+\end{equation}
+
+
+Combining equation \ref{eq:lamda} and  formula \ref{eqt}, we can have formula \ref{eqtt}.
+
+\begin{equation}
+\label{eqtt}
+		\frac{\lambda \times N}{s_{rmax}}+\frac{(1-\lambda) \times N}{s_{smax}} \leq T \leq \frac{\lambda \times N}{s_{rmin}}+\frac{(1-\lambda) \times N}{s_{smin}}
+\end{equation}
+
+Formula \ref{eqtt} indicates that $T$ can be formulated as the form of function over $\lambda$ shown in formula \ref{eq2}, where $s_r$ and $s_s$ are the coloring speed in the recursion stage and sequential spread stage, and $t_r$ $t_s$ are the coloring time spent in the recursion stage and sequential spread stage, respectively, and $f_1(t_r)$ and $f_2(s_s)$ are the functions that takes $s_r$ (or $t_r$) and $t_s$ as input, respectively. 
+
+\begin{equation}
+\label{eq2}
+		T= \lambda f_1(s_r) + (1-\lambda)f_2(s_s) = \lambda f_1(\frac{N}{t_r}) + (1-\lambda)f_2(\frac{N}{t_s})
+\end{equation}
+
+It can be seen from equation \ref{eq2} that finding a minimum $T$ is a convex optimization problem. We will show how we choose a suitable value $fraction$ for $\lambda$ in section \ref{experiments}. When the color rate $\lambda$ is higher than $fraction$, the graph coloring in Feluca switches from the first stage (recursion) to the second stage (sequential spread). 
