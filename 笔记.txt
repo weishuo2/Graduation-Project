@@ -1,0 +1,66 @@
+1.通过对大量GPU流处理器的高效管理和独特的内存层次结构来仔细匹配GPU的硬件特性。
+2.根据声明，凡是挂有“__global__”或者“__device__”前缀的函数，都是在GPU上运行的设备程序，不同的是__global__设备程序可被主机程序调用，而__device__设备程序则只能被设备程序调用。
+没有挂任何前缀的函数，都是主机程序。主机程序显示声明可以用__host__前缀。设备程序需要由NVCC进行编译，而主机程序只需要由主机编译器（如VS2008中的cl.exe，Linux上的GCC）。
+主机程序主要完成设备环境初始化，数据传输等必备过程，设备程序只负责计算。
+主机程序中，有一些“cuda”打头的函数，这些都是CUDA Runtime API，即运行时函数，主要负责完成设备的初始化、内存分配、内存拷贝等任务。
+3.一个SP可以执行一个thread，但是实际上并不是所有的thread能够在同一时刻执行。
+Nvidia把32个threads组成一个warp，warp是调度和运行的基本单元。
+warp中所有threads并行的执行相同的指令。一个warp需要占用一个SM运行，多个warps需要轮流进入SM。
+4.block是软件概念，一个block只会由一个sm调度，程序员在开发时，通过设定block的属性，告诉GPU硬件，我有多少个线程，线程怎么组织。
+而具体怎么调度由sm的warps scheduler负责，block一旦被分配好SM，该block就会一直驻留在该SM中，直到执行结束。
+5.不同于CPU，CPU切换线程需要保存/读取线程上下文（register内容），这是非常耗时的，而GPU为每个threads提供物理register，无需保存/读取上下文。
+6.当遇到数据并行处理的部分，CUDA 就会将程序编译成 GPU 能执行的程序，并传送到GPU。而这个程序在CUDA里称做核（kernel）。
+执行核的每个线程都会被分配一个独特的线程ID，可通过内置的threadIdx变量在内核中访问此ID。
+主程序在调用任何 GPU 内核之前，必须对核进行执行配置，即确定线程块数和每个线程块中的线程数以及共享内存大小。
+7.核函数只能在主机端调用，其调用形式为：Kernel<<<Dg,Db, Ns, S>>>(param list)
+Dg：用于定义整个grid的维度和尺寸，即一个grid有多少个block。为dim3类型。Dim3 Dg(Dg.x, Dg.y, 1)表示grid中每行有Dg.x个block，每列有Dg.y个block，第三维恒为1(目前一个核函数只有一个grid)。整个grid中共有Dg.x*Dg.y个block，其中Dg.x和Dg.y最大值为65535。
+Db：用于定义一个block的维度和尺寸，即一个block有多少个thread。为dim3类型。Dim3 Db(Db.x, Db.y, Db.z)表示整个block中每行有Db.x个thread，每列有Db.y个thread，高度为Db.z。Db.x和Db.y最大值为512，Db.z最大值为62。一个block中共有Db.xDb.yDb.z个thread。计算能力为1.0,1.1的硬件该乘积的最大值为768，计算能力为1.2,1.3的硬件支持的最大值为1024。
+Ns：是一个可选参数，用于设置每个block除了静态分配的shared Memory以外，最多能动态分配的shared memory大小，单位为byte。不需要动态分配时该值为0或省略不写。
+S：是一个cudaStream_t类型的可选参数，初始值为零，表示该核函数处在哪个流之中。
+8.纹理存储器也为某些特殊的数据格式提供了不同的寻址模式以及数据过滤，方便 Host对流数据的快速存取。
+9.nvprof cuda9.exe
+10.cudaThreadSynchronize()来同步同一个block的thread以保证在进行下一步处理之前，所有thread都到达某个时间点。
+11.一个电脑可能有多个GPU，可以使用cudaChooseDevice来选择对应的设备号（返回值），cudaSetDevice可以选择对应的设备进行运行代码。
+12.dim3 grid(100,100)  kernel<<<grid,1>>>();
+13.nvprof ./exe ../com-youtube.ungraph.txt_beg_pos.bin ../com-youtube.ungraph.txt_csr.bin 256
+14../exe --file ../../../zhengzhigao/dataset/mixdata/dblp_88M.txt --start_index 1 --max_iters -1 --frac 0.8 --dev 0 --iter2 -1
+15.source ~/.bashrc
+16.CTRL + c  中断。  CTRL + z  暂停放到后台。  CTRL + d  保存退出。
+17.实在不行就这样，我们用三个结点跑。327上面只有K20,328上就用默认的K40，最后335上用默认的P100
+18.watch -n 0.1 nvidia-smi
+19.node328  dev0是K40  dev1是k20
+20.当代码中有需要GPU运行的代码时，就需要命名为.cu，使用nvcc编译，(C代码也可以用nvcc)
+在将block申明为dim3类型时，其大小可以在CPU代码内进行修改。
+21.核函数的调用是异步的，在调用不需要运行完成就会将控制权返回。
+但是如果后面接了拷贝函数。可以起到隐式同步的作用。
+22.保证GPU函数的正确性可以通过运行完后加测试条件，代码错误可以通过检测函数来知道哪一块出现了错误。最后是计时。
+23.nvvp可视化分析器，属于nsight的一部分。nvprof命令行分析器
+24.在硬件上执行时，每个线程块会被调度到一个SM上，然后块中线程会被划分为32个一组的线程束，然后执行，所以块大小需为32的偶数倍。
+if-else逻辑分化是针对线程束中线程而言的，if((tid/32)%2)就不会产生分化，而针对blockid的判断也不会产生分化。
+CUDA自己有分支预测，，在分化路径较短时，可以解决部分这个问题。
+可以在编译时添加指令使其强制不使用分支预测进行优化。
+25.存在于SM中的线程块和线程束数量取决于内核需要的寄存器数量和共享内存的数量。
+每个SM，kepler，寄存器大小为64KB，共享内存为48KB，理论最多支持2048个线程。
+26.nvprof --metrics branch_efficiency 可以获取分支效率（未分化分支与全部分支之比）
+--metrics achieved_occupancy可以获取活跃线程数占比，用--devices可以选取指定GPU
+--metrics gld_throughput可以获取内存读取效率
+--metrics gld_efficiency 获取实际请求的内存与加载的内存之比
+--。。。   stall_sync
+27.可以通过指令查看GPU内核的占用率，从而调整块的大小。一般而言，块至少有128或256个线程，而块数应该远大于SM数量。
+28.volatile修饰的变量可以保证每次操作后必定是写入内存中
+29.线程内无修饰的变量分配在寄存器上；如果数组的所有的索引是常量且能在编译时确定，则该数组也可以分配在寄存器上。
+超出了硬件限制就会使用本地内存(实际在全局内存)来代替。nvcc编译器可以添加-Xptxas -v,-abi=no可以查看对应内存的使用大小。
+30.常量内存，最好是所有线程都要读这个数，比如数学公式的系数。
+31.固定内存传输吞吐量更高。零拷贝内存是固定内存的一种，可由主机和设备访问，但是延迟较高，对少量数据适用。
+统一内存寻址 cudaMallocManaged
+32.内存的读写都是线程束的32个线程一起，所以他们读的最好连续 
+33.影响效率的两点：1.可合并的访问和写入大小   2.可并发处理的内存块大小（展开部分操作，设置块大小）
+34.两个线程束同时想写同一块区域，只会执行一个
+35.GPU上对于数据的读写都是异步的，可能会暂存在寄存器中。而volatile保证必定会读写进内存中。
+__threadfence_block内存栅栏，不知道干什么的。
+36.OpenACC指令与OpenMP指令工作方式很类似
+37.与OpenMP并行程序不同，MPI是一种基于信息传递的并行编程技术。消息传递接口是一种编程接口标准，而不是一种具体的编程语言。
+
+
+
+
